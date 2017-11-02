@@ -1,0 +1,280 @@
+\documentclass{scrreprt}
+\usepackage{listings}
+\usepackage{underscore}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\usepackage[table]{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{setspace}
+
+\setlist{nolistsep}
+\definecolor{green}{HTML}{66FF66}
+\definecolor{myGreen}{HTML}{009900}
+\definecolor{myBlue}{HTML}{003399}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+
+\selectlanguage{polish}
+\hypersetup{
+    bookmarks=false,    % show bookmarks bar?
+    pdftitle={Specyfikacja wymagań},    % title
+    pdfauthor={Marta Wisniewska},                     % author
+    pdfsubject={TeX and LaTeX},                        % subject of the document
+    pdfkeywords={TeX, LaTeX, graphics, images}, % list of keywords
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,       % color of internal links
+    citecolor=black,       % color of links to bibliography
+    filecolor=black,        % color of file links
+    urlcolor=purple,        % color of external links
+    linktoc=page            % only page is linked
+}%
+\def\myversion{1.0 }
+\date{}
+%\title{%
+
+%}
+\usepackage{hyperref}
+\begin{document}
+
+\begin{flushright}
+    \rule{16cm}{5pt}\vskip1cm
+    \begin{bfseries}
+        \Huge{SPECYFIKACJA WYMAGAŃ}\\
+        \vspace{1.9cm}
+       Systemu zarządzania obrazami \\ do wspomagania pracy lekarzy \\  Image Manager 1.0\\
+        \vspace{8.9cm}
+ \end{bfseries}
+        \Huge{{Marta Wi\'sniewska}}\\
+        \vspace{1.9cm}
+        \today\\
+   
+\end{flushright}
+
+\tableofcontents
+
+\chapter{Wstęp}
+\section{Cel}
+Niniejsza specyfikacja opisuje wymagania funkcjonalne i niefunkcjonalne wersji~1.0~systemu~zarządzania~obrazami do~wspomagania pracy lekarzy "Image Manager". Dokument służy do weryfikacji poprawno\'sci działania systemu. Jest przeznaczony dla użytkowników systemu oraz programistów, którzy będą rozwijać i implementować system w~przyszło\'sci.
+\section{Zakres projektu}
+System "Image Manager"~pozwala lekarzom na bezpieczne zarządzanie obrazami medycznymi. Umożliwia wczytywanie zdjęć, a następnie wy\'swietlanie ich w przeglądarce. System daje uprawnionym użytkownikom możliwo\'sć edycji obrazów poprzez dodawanie i~aplikowanie efektów do zdjęć. Zmodyfikowany obraz będący wynikiem działania programu, może zostać zapisany, a~następnie wykorzystany przez lekarza przy analizie i diagnozie lekarskiej.
+\chapter{Opis ogólny}
+\section{Perspektywa produktu}
+System zarządzania obrazami do wspomagania pracy lekarzy jest nowym systemem. Diagram kontekstowy z rysunku \ref{fig:diag1} przedstawia proces komunikacji obiektów zewnętrznych z systemem wersji 1.0. System może być rozbudowany w przyszło\'sci o dodatkowe funkcjonalno\'sci takie jak możliwo\'sć dodawania znaczników do zdjęć i eksport danych o znacznikach obrazu do plików.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{diagramKontekstowy.png}
+    \caption{Diagram kontekstowy systemu Image Manager 1.0}
+    \label{fig:diag1}
+\end{figure}
+\section{ Klasy oraz charakterystyki użytkowników }
+\begin{center}
+\begin{tabularx}{\textwidth}[h]{XX}
+\arrayrulecolor{myBlue}\hline
+\textbf{\textcolor{myBlue}{Klasa Użytkownika}} & 
+\begin{minipage}[t]{\linewidth}%
+\textbf{\textcolor{myBlue}{Opis}}
+\end {minipage}\\
+
+\hline
+Użytkownik niezalogowany & 
+\begin{minipage}[t]{\linewidth}%
+Użytkownik nieposiadający uprawnień do~systemu. Jedyną udostępnioną funkcją jest logowanie.   
+\end{minipage}\\
+\arrayrulecolor{black}\hline
+Lekarz & 
+\begin{minipage}[t]{\linewidth}%
+Zalogowany użytkownik systemu posiadający dostęp do obrazów. Uprawniony do korzystania z systemu w zakresie dodawania nowych obrazów, wy\'swietlania obrazów w przeglądarce oraz usuwania wybranych zdjęć. 
+\end{minipage}\\
+\arrayrulecolor{black}\hline
+Specjalista & 
+\begin{minipage}[t]{\linewidth}%
+Zalogowany użytkownik systemu, posiadający wszystkie uprawnienia lekarza oraz dodatkowo możliwo\'sć edycji zdjęć, dodawania nowych efektów oraz zapisu zmodyfikowanych obrazów.  
+\end{minipage}\\
+\arrayrulecolor{black}\hline
+
+
+
+\end{tabularx}
+\end{center}
+
+\newpage
+\section{ Środowisko robocze}
+Wymagania programowe stacji roboczej:\\
+System operacyjny - dowolny system operacyjny obsługujący minimum jedną z niżej opisanych przeglądarek internetowych.\\
+
+\textbf{\textcolor{myBlue}{SR-1}} . System powinien poprawnie działać w następujących przeglądarkach internetowych:
+\begin{itemize}[label={--}]
+\item{Internet Explorer 10 i nowsze}
+\item{Mozilla Firefox 56 (najnowsza wersja)}
+\item{Google Chrome 62 (najnowsza wersja)}
+\item{Safari 7 i nowsze}
+\end{itemize}
+Zalecane są najnowsze wersje wymienionych wyżej przeglądarek.\\
+
+Do poprawnego działania aplikacja wymaga, aby przeglądarka internetowa miała uaktywnione takie opcje jak: 
+\begin{itemize}[label={--}]
+\item{Obsługę języka „JavaScript”}
+%\item{Akceptowanie ciasteczek ze strony z adresem zainstalowanej aplikacji.}
+\item{Obsługę protokołu „SSL 3.0”, bądź „TLS 1.0, 1.1, 1.2”.}
+\end{itemize} 
+
+%\textbf{\textcolor{myBlue}{SR-2}}. System  będzie działać na serwerze Amazon...
+\section{Ograniczenia projektu i implementacji} 
+\textbf{\textcolor{myBlue}{OP-1}}. Kod HTML powinien być zgodny ze standardem HTML 5.0. \\
+\chapter{Funkcjonalno\'sć systemu}
+Wymagania funkcjonalne systemu zostały opracowane na podstawie diagramu przypadków użycia przedstawionego na rysunku \ref{fig:uc1}. Grupa przypadków użycia wyróżniona granatowym obramowaniem dotyczy  przypadków użycia lekarza (oraz specjalisty). Są to podstawowe przypadki użycia wersji 1.0 systemu "Image Manager".
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.99\textwidth]{useCases.png}
+    \caption{Diagram przypadków użycia systemu Image Manager 1.0}
+    \label{fig:uc1}
+\end{figure}
+	\section{Wymagania funkcjonalne}
+	\begin{center}
+		\begin{tabularx}{\textwidth}[t]{XX}
+		\arrayrulecolor{black}
+		\hline
+		\textbf{\linespread{1.5}\textcolor{black}{Logowanie do systemu}} & \\
+		\hline
+		\textbf{\textcolor{myBlue}{WF-1}}
+		\hspace{1cm}
+			\begin{minipage}[t]{1.7\linewidth}%
+			 System powinien umożliwiać logowanie użytkownika do systemu.
+			\end{minipage}\\
+		\textbf{\textcolor{myBlue}{WF-2}}
+		\hspace{1cm}
+			\begin{minipage}[t]{1.7\linewidth}%
+			 System powinien przypisać użytkownikowi rolę i udostępnić tej roli okre\'slone uprawnienia w aplikacji.
+			\end{minipage}\\
+		\textbf{\textcolor{myBlue}{WF-3}} 
+		\hspace{1cm}
+			\begin{minipage}[t]{1.7\linewidth}%
+			 W przypadku błędu podczas logowania system powinien wy\'swietlać komunikat o niepowodzeniu i przyczynie błędu.
+			\end{minipage}\\
+		
+		\hline
+		\textbf{\textcolor{black}{Dodawanie nowego obrazu}} \\
+		\hline
+		\textbf{\textcolor{myBlue}{WF-4}}
+		\hspace{1cm}
+			\begin{minipage}[t]{1.7\linewidth}%
+			Zalogowani użytkownicy z rolą lekarza lub specjalisty powinni mieć możliwo\'sć dodawania obrazów z tytułem i opisem poprzez pola formularza. Użytkownik po kliknięciu przycisku "Upload"~powinien móc załadować dowolny obraz w~formacie: .png, .bmp, .gif, .jpg. Pola tekstowe powinny umożliwiać dodanie tytułu oraz opisu załadowanego obrazu.
+			\end{minipage}\\
+		\textbf{\textcolor{myBlue}{WF-5}}
+		\hspace{1cm}
+			\begin{minipage}[t]{1.7\linewidth}%
+			System powinien wy\'swietlać obraz załadowany przez użytkownika.
+\end{minipage}\\
+
+\textbf{\textcolor{myBlue}{WF-6}}
+\hspace{1cm}
+\begin{minipage}[t]{1.7\linewidth}%
+Użytkownik powinien mieć możliwo\'sć usunięcia załadowanego obrazu i~zmiany, przed dodaniem go z tytułem i~opisem do~systemu. 
+\end{minipage}\\
+
+\textbf{\textcolor{myBlue}{WF-7}}
+\hspace{1cm}
+\begin{minipage}[t]{1.7\linewidth}%
+Po poprawnym dodaniu obrazu system powinien przechowywać obraz, jego tytuł, opis oraz datę dodania.
+\end{minipage}\\
+
+
+\textbf{\textcolor{myBlue}{WF-8}}
+\hspace{1cm}
+\begin{minipage}[t]{1.7\linewidth}%
+W przypadku niepowodzenia procesu dodawania zdjęcia system powinien wy\'swietlać komunikat z przyczyną błędu.
+\end{minipage}\\
+\hline
+
+\textbf{\textcolor{black}{Wy\'swietlanie dostępnych obrazów}} \\
+\hline
+\textbf{\textcolor{myBlue}{WF-9}}
+\hspace{1cm}
+\begin{minipage}[t]{1.7\linewidth}%
+System powinien wy\'swietlać uprawnionemu użytkownikowi dostępne obrazy w postaci listy. Elementy listy powininny zawierać miniaturę obrazu, tytuł oraz datę dodania obrazu do systemu.
+\end{minipage}\\
+
+\textbf{\textcolor{myBlue}{WF-10}}
+\hspace{0.8cm}
+\begin{minipage}[t]{1.7\linewidth}%
+System powinien umożliwić sortowanie listy dostępnych obrazów według: nazwy obrazu lub daty dodania obrazu.
+\end{minipage}\\
+
+\textbf{\textcolor{myBlue}{WF-11}}
+\hspace{0.8cm}
+\begin{minipage}[t]{1.7\linewidth}%
+Po wybraniu elementu z listy system powinien wy\'swietlić obraz w pełnym rozmiarze wraz z informacjami dotyczącymi danego obrazu: tytułem, opisem, datą dodania obrazu.
+\end{minipage}\\
+\hline
+\textbf{\textcolor{black}{Usuwanie wybranego obrazu}} \\
+\hline
+\textbf{\textcolor{myBlue}{WF-12}}
+\hspace{0.8cm}
+\begin{minipage}[t]{1.7\linewidth}%
+Użytkownik powinien mieć możliwo\'sć usunięcia wybranego obrazu z listy dostępnych obrazów poprzez kliknięcie ikony 'X' przy wybranym obrazie. 
+\end{minipage}\\
+
+\textbf{\textcolor{myBlue}{WF-13}}
+\hspace{0.8cm}
+\begin{minipage}[t]{1.7\linewidth}%
+System powinien wymagać potwierdzenia przez użytkownika akcji usunięcia zdjęcia.
+\end{minipage}\\
+
+\hline
+\textbf{\textcolor{black}{Edycja obrazów}} \\
+\hline
+
+\textbf{\textcolor{myBlue}{WF-14}}
+\hspace{0.8cm}
+\begin{minipage}[t]{1.7\linewidth}%
+Specjalista powinien móc zmodyfikować zdjęcie, wybierając jedną z opcji: Crop, Brightness Correction, Contrast Adjustment, Color Adjustment, Zoom.
+\end{minipage}\\
+
+\textbf{\textcolor{myBlue}{WF-15}}
+\hspace{0.8cm}
+\begin{minipage}[t]{1.7\linewidth}%
+Specjalista powinien mieć możliwo\'sć dodawania nowych efektów do modyfikacji obrazów.
+\end{minipage}\\
+
+\textbf{\textcolor{myBlue}{WF-16}}
+\hspace{0.8cm}
+\begin{minipage}[t]{1.7\linewidth}%
+Specjalista powinien móc odrzucić wprowadzone efekty edycji obrazu.
+\end{minipage}\\
+
+
+\textbf{\textcolor{myBlue}{WF-17}}
+\hspace{0.8cm}
+\begin{minipage}[t]{1.7\linewidth}%
+Specjalista powinien mieć możliwo\'sć zapisu zmodyfikowanego obrazu.
+\end{minipage}\\
+\hline
+\end{tabularx}
+\end{center}
+
+%\chapter{Wymagania dotyczące danych}
+
+%\section{Pozyskiwanie, integralność, przechowywanie i usuwanie danych}
+
+\chapter{Atrybuty jako\'sciowe}
+
+\section{Bezpieczeństwo}
+\textbf{\textcolor{myBlue}{BEZ-1}} Tylko zalogowani użytkownicy mogą zarządzać obrazami w systemie. \\ 
+\textbf{\textcolor{myBlue}{BEZ-2}} Wszystkie dane dotyczące obrazów powinny być szyfrowane. \\ 
+\textbf{\textcolor{myBlue}{BEZ-3}} Operacje modyfikacji obrazów mogą być wykonywane tylko przez autoryzowanych specjalistów. \\ 
+
+
+
+
+\end{document}
