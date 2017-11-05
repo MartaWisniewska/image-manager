@@ -126,12 +126,15 @@ Do poprawnego działania aplikacja wymaga, aby przeglądarka internetowa miała 
 \begin{itemize}[label={--}]
 \item{Obsługę języka „JavaScript”}
 %\item{Akceptowanie ciasteczek ze strony z adresem zainstalowanej aplikacji.}
-\item{Obsługę protokołu „SSL 3.0”, bądź „TLS 1.0, 1.1, 1.2”.}
+%\item{Obsługę protokołu „SSL 3.0”, bądź „TLS 1.0, 1.1, 1.2”.}
 \end{itemize} 
 
 %\textbf{\textcolor{myBlue}{SR-2}}. System  będzie działać na serwerze Amazon...
 \section{Ograniczenia projektu i implementacji} 
 \textbf{\textcolor{myBlue}{OP-1}}. Kod HTML powinien być zgodny ze standardem HTML 5.0. \\
+\textbf{\textcolor{myBlue}{OP-2}}. Kod CSS powinien być zgodny ze standardem CSS 3.0. \\
+\textbf{\textcolor{myBlue}{OP-3}}. Kod JS powinien być zgodny ze standardem ECMAScript 6. \\
+\textbf{\textcolor{myBlue}{OP-4}}. Kod TS powinien być zgodny ze standardem TypeScript 2.6 \\
 \chapter{Funkcjonalno\'sć systemu}
 Wymagania funkcjonalne systemu zostały opracowane na podstawie diagramu przypadków użycia przedstawionego na rysunku \ref{fig:uc1}. Grupa przypadków użycia wyróżniona granatowym obramowaniem dotyczy  przypadków użycia lekarza (oraz specjalisty). Są to podstawowe przypadki użycia wersji 1.0 systemu "Image Manager".
 \begin{figure}[h]
@@ -271,7 +274,7 @@ Specjalista powinien mieć możliwo\'sć zapisu zmodyfikowanego obrazu.
 
 \section{Bezpieczeństwo}
 \textbf{\textcolor{myBlue}{BEZ-1}} Tylko zalogowani użytkownicy mogą zarządzać obrazami w systemie. \\ 
-\textbf{\textcolor{myBlue}{BEZ-2}} Wszystkie dane dotyczące obrazów powinny być szyfrowane. \\ 
+\textbf{\textcolor{myBlue}{BEZ-2}} Wszystkie dane dotyczące obrazów powinny być szyfrowane za pomocą protokołu TLS~1.2. \\ 
 \textbf{\textcolor{myBlue}{BEZ-3}} Operacje modyfikacji obrazów mogą być wykonywane tylko przez autoryzowanych specjalistów. \\ 
 
 
